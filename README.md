@@ -138,6 +138,23 @@ Development builds may include the Git commit identifier and dirty-worktree
 state in their version so that an artifact can be traced back to the exact
 workspace state from which it was built.
 
+Set the shared component version from the workspace root:
+
+```bash
+task version:set VERSION=0.8.0
+```
+
+This updates the backend Maven revision and frontend npm metadata, then displays
+the declared values. Confirm they match at any time with:
+
+```bash
+task version:check
+```
+
+Release tags remain developer-controlled. The release workflow is: set the
+version, review the diff, verify components, commit, tag the release, then
+release images.
+
 A component that requires an independent version or release lifecycle is a
 signal that it may no longer belong to the same cohesive application workspace
 and should be considered for extraction into a separate repository.

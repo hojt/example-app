@@ -10,6 +10,16 @@ tasks:
     cmds:
       - git status --short
 
+  version:check:
+    desc: Verify that component version declarations match
+    cmds:
+      - ./scripts/version-check.sh
+
+  version:set:
+    desc: Set the shared application version (VERSION=MAJOR.MINOR.PATCH)
+    cmds:
+      - ./scripts/version-set.sh '{{.VERSION | default ""}}'
+
   backend:dev:
     desc: Start the backend in development mode
     dir: services/backend
