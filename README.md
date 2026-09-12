@@ -94,6 +94,44 @@ The backend can also be operated directly from `services/backend` using its own
 The backend currently publishes the `example-backend` OCI image. Source layout
 and deployment identity are intentionally separate concerns.
 
+## Versioning
+
+`example-app` is versioned as one application workspace.
+
+All components in the repository share the same Git-derived application version.
+A Git tag therefore represents the version of the complete application workspace
+at that commit, even though its components remain independently buildable and
+deployable.
+
+Release tags use the form:
+
+```text
+<version>
+```
+
+For example:
+
+```text
+0.6.1
+```
+
+Published component artifacts use the application version as their artifact
+version. With multiple components in the workspace, a single application release
+may therefore produce artifacts such as:
+
+```text
+example-backend:0.6.1
+example-frontend:0.6.1
+```
+
+Development builds may include the Git commit identifier and dirty-worktree
+state in their version so that an artifact can be traced back to the exact
+workspace state from which it was built.
+
+A component that requires an independent version or release lifecycle is a
+signal that it may no longer belong to the same cohesive application workspace
+and should be considered for extraction into a separate repository.
+
 ## Architecture
 
 The application workspace model is defined by ADR-0007 in the `homelab`

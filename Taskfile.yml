@@ -28,8 +28,26 @@ tasks:
     cmds:
       - task verify
 
+  backend:image:
+    desc: Build and push the backend container image
+    dir: services/backend
+    cmds:
+      - task image
+
   backend:image:build:
     desc: Build the backend container image
     dir: services/backend
     cmds:
       - task image:build
+
+  backend:image:push:
+    desc: Push the backend container image
+    dir: services/backend
+    cmds:
+      - task image:push
+
+  backend:image:release:
+    desc: Release the backend container image
+    dir: services/backend
+    cmds:
+      - task image:release
