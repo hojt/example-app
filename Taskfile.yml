@@ -1,0 +1,11 @@
+version: '3'
+
+tasks:
+  default:
+    cmds:
+      - task --list
+
+  status:
+    desc: Show application workspace status
+    cmds:
+      - git status --short

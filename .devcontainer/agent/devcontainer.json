@@ -1,0 +1,23 @@
+{
+  "name": "example-app-agent",
+  "build": {
+    "dockerfile": "../Containerfile",
+    "context": "../..",
+    "target": "agent"
+  },
+  "workspaceFolder": "/workspace",
+  "containerEnv": {
+    "OPENCODE_EXPERIMENTAL_DISABLE_FILEWATCHER": "1"
+  },
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/workspace,type=bind",
+    "source=example-app-maven-cache,target=/home/developer/.m2,type=volume",
+    "source=${localEnv:HOME}/.local/share/opencode/auth.json,target=/home/developer/.local/share/opencode/auth.json,type=bind"
+  ],
+  "runArgs": [
+    "--security-opt=label=disable"
+  ],
+  "remoteUser": "developer",
+  "containerUser": "developer",
+  "updateRemoteUserUID": true
+}
