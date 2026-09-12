@@ -9,3 +9,27 @@ tasks:
     desc: Show application workspace status
     cmds:
       - git status --short
+
+  backend:dev:
+    desc: Start the backend in development mode
+    dir: services/backend
+    cmds:
+      - task dev
+
+  backend:test:
+    desc: Run backend tests
+    dir: services/backend
+    cmds:
+      - task test
+
+  backend:verify:
+    desc: Run the backend verification pipeline
+    dir: services/backend
+    cmds:
+      - task verify
+
+  backend:image:build:
+    desc: Build the backend container image
+    dir: services/backend
+    cmds:
+      - task image:build

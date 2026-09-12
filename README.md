@@ -41,14 +41,20 @@ Those responsibilities belong to `local-platform` and `local-environments`.
 
 ```text
 .
-├── apps/       # frontend applications
-├── services/   # backend services and workers
-├── docs/       # application-level documentation
+├── apps/               # frontend applications
+├── services/
+│   └── backend/        # Quarkus backend service
+├── docs/               # application-level documentation
 └── ...
 ```
 
-The structure is intentionally minimal and will evolve as real application
-components are introduced.
+The workspace currently contains one independently buildable and deployable
+component:
+
+- `services/backend` builds the `example-backend` application and OCI image.
+
+Additional application components will be introduced incrementally as concrete
+needs emerge.
 
 ## Development
 
@@ -58,11 +64,35 @@ Start or reconnect to the repository development environment:
 ./dev.sh
 ```
 
-List available repository tasks:
+Start the coding-agent environment:
+
+```bash
+./agent.sh
+```
+
+List available workspace tasks:
 
 ```bash
 task --list
 ```
+
+The root `Taskfile.yml` provides the application-workspace interface. Component
+specific automation remains close to each component.
+
+Current backend tasks include:
+
+```bash
+task backend:dev
+task backend:test
+task backend:verify
+task backend:image:build
+```
+
+The backend can also be operated directly from `services/backend` using its own
+`Taskfile.yml`.
+
+The backend currently publishes the `example-backend` OCI image. Source layout
+and deployment identity are intentionally separate concerns.
 
 ## Architecture
 
