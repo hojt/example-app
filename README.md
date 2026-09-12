@@ -95,6 +95,7 @@ task frontend:dev
 task frontend:test
 task frontend:verify
 task frontend:build
+task frontend:image:build
 ```
 
 The backend can also be operated directly from `services/backend` using its own

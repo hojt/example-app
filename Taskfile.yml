@@ -81,3 +81,27 @@ tasks:
     dir: apps/frontend
     cmds:
       - task verify
+
+  frontend:image:
+    desc: Build and push the frontend container image
+    dir: apps/frontend
+    cmds:
+      - task image
+
+  frontend:image:build:
+    desc: Build the frontend container image
+    dir: apps/frontend
+    cmds:
+      - task image:build
+
+  frontend:image:push:
+    desc: Push the frontend container image
+    dir: apps/frontend
+    cmds:
+      - task image:push
+
+  frontend:image:release:
+    desc: Release the frontend container image
+    dir: apps/frontend
+    cmds:
+      - task image:release
