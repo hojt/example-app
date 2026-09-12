@@ -17,12 +17,14 @@ RUN groupadd --gid "${USER_GID}" "${USERNAME}" \
 RUN mkdir -p \
       "/home/${USERNAME}/.config/nvim" \
       "/home/${USERNAME}/.m2" \
+      "/home/${USERNAME}/.npm" \
       "/home/${USERNAME}/.local/share/nvim" \
       "/home/${USERNAME}/.local/state/nvim" \
       "/home/${USERNAME}/.cache/nvim" \
     && chown -R "${USERNAME}:${USERNAME}" \
       "/home/${USERNAME}/.config" \
       "/home/${USERNAME}/.m2" \
+      "/home/${USERNAME}/.npm" \
       "/home/${USERNAME}/.local" \
       "/home/${USERNAME}/.cache"
 
@@ -37,12 +39,21 @@ RUN dnf install -y \
         java-21-openjdk-devel \
         maven \
         neovim \
+        nodejs24 \
+        nodejs24-npm \
         podman \
         procps-ng \
         ripgrep \
         tar \
         unzip \
     && dnf clean all
+
+RUN ln --symbolic /usr/bin/node-24 /usr/local/bin/node \
+    && ln --symbolic /usr/bin/npm-24 /usr/local/bin/npm \
+    && ln --symbolic /usr/bin/npx-24 /usr/local/bin/npx \
+    && node --version \
+    && npm --version \
+    && npx --version
 
 RUN curl --fail --location --silent --show-error \
         "https://github.com/go-task/task/releases/download/v${TASK_VERSION}/task_linux_amd64.tar.gz" \

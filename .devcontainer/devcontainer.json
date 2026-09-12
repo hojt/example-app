@@ -13,6 +13,7 @@
     "source=${localWorkspaceFolder},target=/workspace,type=bind",
     "source=${localEnv:XDG_RUNTIME_DIR}/podman/podman.sock,target=/run/podman/podman.sock,type=bind",
     "source=example-app-maven-cache,target=/home/developer/.m2,type=volume",
+    "source=example-app-npm-cache,target=/home/developer/.npm,type=volume",
     "source=${localEnv:HOME}/.config/nvim,target=/home/developer/.config/nvim,type=bind",
     "source=${localEnv:HOME}/.gitconfig,target=/home/developer/.gitconfig,type=bind,readonly",
     "source=example-app-nvim-data,target=/home/developer/.local/share/nvim,type=volume"
