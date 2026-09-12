@@ -48,9 +48,9 @@ Those responsibilities belong to `local-platform` and `local-environments`.
 └── ...
 ```
 
-The workspace currently contains one independently buildable and deployable
-component:
+The workspace currently contains two independently buildable components:
 
+- `apps/frontend` builds the `example-frontend` browser application.
 - `services/backend` builds the `example-backend` application and OCI image.
 
 Additional application components will be introduced incrementally as concrete
@@ -86,6 +86,15 @@ task backend:dev
 task backend:test
 task backend:verify
 task backend:image:build
+```
+
+Current frontend tasks include:
+
+```bash
+task frontend:dev
+task frontend:test
+task frontend:verify
+task frontend:build
 ```
 
 The backend can also be operated directly from `services/backend` using its own

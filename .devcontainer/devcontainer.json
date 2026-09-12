@@ -19,7 +19,8 @@
     "source=example-app-nvim-data,target=/home/developer/.local/share/nvim,type=volume"
   ],
   "runArgs": [
-    "--security-opt=label=disable"
+    "--security-opt=label=disable",
+    "--publish=127.0.0.1:5173:5173"
   ],
   "remoteUser": "developer",
   "containerUser": "developer",

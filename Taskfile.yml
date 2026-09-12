@@ -51,3 +51,33 @@ tasks:
     dir: services/backend
     cmds:
       - task image:release
+
+  frontend:dev:
+    desc: Start the frontend in development mode
+    dir: apps/frontend
+    cmds:
+      - task dev
+
+  frontend:build:
+    desc: Build the frontend
+    dir: apps/frontend
+    cmds:
+      - task build
+
+  frontend:test:
+    desc: Run frontend tests
+    dir: apps/frontend
+    cmds:
+      - task test
+
+  frontend:check:
+    desc: Run frontend type checks
+    dir: apps/frontend
+    cmds:
+      - task check
+
+  frontend:verify:
+    desc: Run the frontend verification pipeline
+    dir: apps/frontend
+    cmds:
+      - task verify
