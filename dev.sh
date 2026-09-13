@@ -15,7 +15,7 @@ red=""
 reset=""
 
 usage() {
-  printf 'Usage: %s [rebuild]\n' "${0}"
+  printf 'Usage: %s [rebuild|shell]\n' "${0}"
 }
 
 parse_arguments() {
@@ -25,7 +25,7 @@ parse_arguments() {
   fi
 
   case "${mode}" in
-  dev | rebuild)
+  dev | rebuild | shell)
     ;;
   -h | --help)
     usage
@@ -148,6 +148,20 @@ open_troubleshooting_shell() {
   exec "${SHELL:-/bin/bash}" -l
 }
 
+open_existing_devcontainer_shell() {
+  echo
+  echo "Opening additional shell in ${repo_name}"
+  echo
+
+  if ! exec devcontainer exec \
+    --workspace-folder "${repo_root}" \
+    --docker-path podman \
+    bash --login; then
+    open_troubleshooting_shell \
+      "Development container is not running. Start it with ./dev.sh"
+  fi
+}
+
 enter_devcontainer() {
   local -a up_arguments=(
     --workspace-folder "${repo_root}"
@@ -234,5 +248,9 @@ if ! verify_environment; then
 fi
 
 echo
+
+if [[ "${mode}" == "shell" ]]; then
+  open_existing_devcontainer_shell
+fi
 
 start_tmux_session
