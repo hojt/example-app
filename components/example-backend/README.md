@@ -4,7 +4,7 @@ A minimal Quarkus backend used to validate the local development platform and it
 
 ## Purpose
 
-This repository provides a small reference backend for exercising the local development and Kubernetes platform.
+This component provides a small reference backend for exercising the local development and Kubernetes platform.
 
 It currently demonstrates:
 
@@ -46,13 +46,13 @@ The developer host only needs the tooling required to start that environment, pr
 - Podman
 - Dev Container CLI
 
-Repository-specific development tooling is provided by the Dev Container.
+Workspace-specific development tooling is provided by the Dev Container.
 
 ## Development
 
 Development is performed inside the provided Dev Container.
 
-Start or reconnect to the repository development environment from the host with:
+Start or reconnect to the workspace development environment from the workspace root with:
 
 ```bash
 ./dev.sh
@@ -66,7 +66,13 @@ Rebuild the development environment with:
 ./dev.sh rebuild
 ```
 
-Once inside the Dev Container, start the application in development mode with:
+Once inside the Dev Container, start the application from the workspace root with:
+
+```bash
+task backend:dev
+```
+
+Or, from `components/example-backend`, use the component task:
 
 ```bash
 task dev
@@ -189,12 +195,13 @@ The Kubernetes liveness and readiness probes themselves are environment configur
 
 ## Tasks
 
-List the available repository tasks with:
+From the workspace root, list the available workspace tasks with:
 
 ```bash
 task --list
 ```
 
+From `components/example-backend`, `task --list` lists the backend component tasks.
 Task is the normal developer-facing interface for common operations such as development, testing, packaging, and container image handling.
 
 ## Container Image
@@ -203,7 +210,7 @@ The application is packaged and built into an OCI container image using Podman.
 
 Image configuration, including the current image tag, is maintained by the repository scripts. The image tag is the deployable container image version and is independent of the Maven project version in `pom.xml`.
 
-Build the image using the repository task exposed for image building, and publish it to the local registry using the corresponding push task.
+From the workspace root, build the image with `task backend:image:build` and publish it with `task backend:image:push`. From `components/example-backend`, use `task image:build` and `task image:push`.
 
 The local Kubernetes platform exposes its development registry at:
 
@@ -266,12 +273,8 @@ curl https://example.local:8443/api/greeting
 
 ```text
 .
-├── .devcontainer/
-│   └── agent/
 ├── scripts/
 ├── src/
-├── agent.sh
-├── dev.sh
 ├── Containerfile
 ├── Taskfile.yml
 ├── pom.xml

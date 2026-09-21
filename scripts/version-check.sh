@@ -3,8 +3,8 @@
 set -euo pipefail
 
 workspace_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
-backend_dir="${workspace_root}/services/backend"
-frontend_dir="${workspace_root}/apps/frontend"
+backend_dir="${workspace_root}/components/example-backend"
+frontend_dir="${workspace_root}/components/example-frontend"
 
 backend_version="$(cd "${backend_dir}" && ./mvnw --quiet -Dexpression=revision -DforceStdout help:evaluate)"
 frontend_package_version="$(cd "${frontend_dir}" && node --input-type=module --eval "import packageJson from './package.json' with { type: 'json' }; console.log(packageJson.version)")"

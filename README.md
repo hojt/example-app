@@ -41,17 +41,17 @@ Those responsibilities belong to `local-platform` and `local-environments`.
 
 ```text
 .
-├── apps/               # frontend applications
-├── services/
-│   └── backend/        # Quarkus backend service
+├── components/
+│   ├── example-backend/  # Quarkus backend service
+│   └── example-frontend/ # browser application
 ├── docs/               # application-level documentation
 └── ...
 ```
 
 The workspace currently contains two independently buildable components:
 
-- `apps/frontend` builds the `example-frontend` browser application.
-- `services/backend` builds the `example-backend` application and OCI image.
+- `components/example-frontend` builds the `example-frontend` browser application.
+- `components/example-backend` builds the `example-backend` application and OCI image.
 
 Additional application components will be introduced incrementally as concrete
 needs emerge.
@@ -79,7 +79,7 @@ task --list
 The root `Taskfile.yml` provides the application-workspace interface. Component
 specific automation remains close to each component.
 
-Current backend tasks include:
+Run the following commands from the workspace root. Current backend tasks include:
 
 ```bash
 task backend:dev
@@ -88,7 +88,7 @@ task backend:verify
 task backend:image:build
 ```
 
-Current frontend tasks include:
+Run the following commands from the workspace root. Current frontend tasks include:
 
 ```bash
 task frontend:dev
@@ -98,8 +98,8 @@ task frontend:build
 task frontend:image:build
 ```
 
-The backend can also be operated directly from `services/backend` using its own
-`Taskfile.yml`.
+Each component can also be operated directly from its own directory using its
+`Taskfile.yml`: `components/example-backend` and `components/example-frontend`.
 
 The backend currently publishes the `example-backend` OCI image. Source layout
 and deployment identity are intentionally separate concerns.

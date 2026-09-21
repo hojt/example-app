@@ -15,8 +15,8 @@ if [[ ! "${version}" =~ ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]; 
 fi
 
 workspace_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
-backend_dir="${workspace_root}/services/backend"
-frontend_dir="${workspace_root}/apps/frontend"
+backend_dir="${workspace_root}/components/example-backend"
+frontend_dir="${workspace_root}/components/example-frontend"
 
 if ! (cd "${backend_dir}" && ./mvnw --quiet -Dexpression=revision -DforceStdout help:evaluate >/dev/null); then
   echo "Unable to read the backend Maven revision." >&2
