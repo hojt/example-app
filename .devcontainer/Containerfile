@@ -36,7 +36,7 @@ RUN dnf install -y \
         findutils \
         fzf \
         git \
-        java-21-openjdk-devel \
+        java-25-openjdk-devel \
         maven \
         neovim \
         nodejs24 \
